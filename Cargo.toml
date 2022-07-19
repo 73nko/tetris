@@ -15,4 +15,4 @@ js-sys = "0.3.58"
 rand = "0.8.5"
 wasm-bindgen = "0.2.81"
 wasm-react = "0.3.2"
-web-sys = { version = "0.3.58", features = ["Document", "Window"] }
+web-sys = { version = "0.3.58", features = ["HtmlElement", "Window"] }

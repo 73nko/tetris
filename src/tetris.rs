@@ -22,7 +22,7 @@ impl Tetris {
         Self {
             width,
             height,
-            current_shape: &Shape::new_random() + Pos((width as i32) / 2, 0),
+            current_shape: &Shape::new_random() + Pos((width - 1_i32) / 2, 0),
             fixed_shapes: vec![],
             lost: false,
         }
