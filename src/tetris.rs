@@ -28,6 +28,23 @@ impl Tetris {
         }
     }
 
+    pub fn iter_positions(&self) -> impl Iterator<Item = Pos> {
+        let height = self.height;
+        let width = self.width;
+        (0..height).flat_map(move |y| (0..width).map(move |x| Pos(x, y)))
+    }
+
+    pub fn get(&self, pos: Pos) -> Option<&'static str> {
+        if self.current_shape.has_positions(pos) {
+            Some(self.current_shape.typ())
+        } else {
+            self.fixed_shapes
+                .iter()
+                .find(|s| s.has_positions(pos))
+                .map(|s| s.typ())
+        }
+    }
+
     pub fn is_out_of_bounds(&self, shape: &Shape) -> bool {
         !shape
             .positions()
