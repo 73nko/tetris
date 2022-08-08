@@ -8,7 +8,7 @@ pub enum Direction {
     Right,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Tetris {
     width: i32,
     height: i32,
@@ -92,9 +92,9 @@ impl Tetris {
         }
     }
 
-    pub fn shift(&mut self, direction: Direction) {
+    pub fn shift(&mut self, direction: Direction) -> Self {
         if self.lost {
-            return;
+            return self.to_owned();
         }
 
         let translated_current_shape = &self.current_shape
@@ -108,11 +108,13 @@ impl Tetris {
         {
             self.current_shape = translated_current_shape;
         }
+
+        self.to_owned()
     }
 
-    pub fn rotate(&mut self) {
+    pub fn rotate(&mut self) -> Self {
         if self.lost {
-            return;
+            return self.to_owned();
         }
         let rotated_current_shape = self.current_shape.rotated();
         if !self.is_out_of_bounds(&rotated_current_shape)
@@ -120,6 +122,8 @@ impl Tetris {
         {
             self.current_shape = rotated_current_shape;
         }
+
+        self.to_owned()
     }
 
     fn remove_line(&mut self, y: i32) {

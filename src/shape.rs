@@ -1,5 +1,4 @@
 use std::{collections::HashSet, ops::Add};
-
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy)]
 pub struct Pos(pub i32, pub i32);
 
@@ -11,7 +10,7 @@ impl Add for Pos {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Shape {
     typ: &'static str,
     positions: HashSet<Pos>,
