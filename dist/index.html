@@ -1,16 +1,26 @@
 <!DOCTYPE html><html><head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tetris</title>
     <style>
       html {
-        font-size: 1.5em;
+        font-size: 2em;
+      }
+      .board {
+        border: 1px solid grey;
+        display: inline-grid;
+        border: 1px solid #ccc;
+      }
+      .field {
+        border: 1px solid #ccc;
       }
     </style>
   
-<link rel="preload" href="/tetris-8b136c9636a5d711_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/tetris-8b136c9636a5d711.js"></head>
+<link rel="preload" href="/tetris-884ed5ae4327be2a_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/tetris-884ed5ae4327be2a.js"></head>
 <body>
-<script type="module">import init from '/tetris-8b136c9636a5d711.js';init('/tetris-8b136c9636a5d711_bg.wasm');</script><script>(function () {
+<script type="module">import init from '/tetris-884ed5ae4327be2a.js';init('/tetris-884ed5ae4327be2a_bg.wasm');</script><script>(function () {
     var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     var url = protocol + '//' + window.location.host + '/_trunk/ws';
     var poll_interval = 5000;

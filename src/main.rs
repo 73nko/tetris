@@ -13,6 +13,8 @@ mod tetris;
 #[derive(Properties, PartialEq)]
 pub struct BoardProps {
     positions: Vec<String>,
+    width: i32,
+    height: i32,
 }
 
 #[function_component(Board)]
@@ -33,15 +35,21 @@ pub fn board(props: &BoardProps) -> Html {
         }
     });
 
+    let style = format!(
+        "grid-template: repeat({}, 1em) / repeat({}, 1em)",
+        props.height, props.width
+    );
+
     html! {
     <div
         tabindex="0"
         class="board"
+        {style}
         ref={board_ref}
     >
     { positions.iter().map(move |pos| {
         html! {
-            <p>{ pos }</p>
+            <div class="field">{ pos }</div>
         }
     }).collect::<Html>() }
     </div>
@@ -80,7 +88,7 @@ fn tetris_game() -> Html {
     };
 
     let positions = {
-        let game = game;
+        let game = game.clone();
 
         game.iter_positions()
             .map(move |pos| {
@@ -91,10 +99,15 @@ fn tetris_game() -> Html {
             .collect::<Vec<_>>()
     };
 
+    let (width, height) = {
+        let game_cloned = game.clone();
+        (game_cloned.width, game_cloned.height)
+    };
+
     html! {
         <div class="container" onkeydown={handle_key_down}>
             <h1>{"Tetris"}</h1>
-            <Board {positions} />
+            <Board {positions} {width} {height} />
         </div>
     }
 }

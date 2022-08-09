@@ -10,8 +10,8 @@ pub enum Direction {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Tetris {
-    width: i32,
-    height: i32,
+    pub width: i32,
+    pub height: i32,
     current_shape: Shape,
     fixed_shapes: Vec<Shape>,
     lost: bool,

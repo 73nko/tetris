@@ -560,7 +560,7 @@ function getImports() {
         const ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper2498 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper2504 = function(arg0, arg1, arg2) {
         const ret = makeClosure(arg0, arg1, 223, __wbg_adapter_24);
         return addHeapObject(ret);
     };
@@ -597,7 +597,7 @@ function initSync(bytes) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('tetris-8b136c9636a5d711_bg.wasm', import.meta.url);
+        input = new URL('tetris-884ed5ae4327be2a_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
