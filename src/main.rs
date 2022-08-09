@@ -50,9 +50,9 @@ pub fn board(props: &BoardProps) -> Html {
         tabindex="0"
         class="board"
         {style}
+        ref={board_ref}
         onkeydown={&props.handle_key_down}
         onkeyup={&props.handle_key_up}
-        ref={board_ref}
     >
     { positions.iter().map(move |pos| {
         html! {
