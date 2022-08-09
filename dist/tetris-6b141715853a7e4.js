@@ -207,8 +207,36 @@ function makeClosure(arg0, arg1, dtor, f) {
 
     return real;
 }
-function __wbg_adapter_24(arg0, arg1, arg2) {
+function __wbg_adapter_26(arg0, arg1, arg2) {
     wasm._dyn_core__ops__function__Fn__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hda1043ccf146537b(arg0, arg1, addHeapObject(arg2));
+}
+
+function makeMutClosure(arg0, arg1, dtor, f) {
+    const state = { a: arg0, b: arg1, cnt: 1, dtor };
+    const real = (...args) => {
+        // First up with a closure we increment the internal reference
+        // count. This ensures that the Rust closure environment won't
+        // be deallocated while we're invoking it.
+        state.cnt++;
+        const a = state.a;
+        state.a = 0;
+        try {
+            return f(a, state.b, ...args);
+        } finally {
+            if (--state.cnt === 0) {
+                wasm.__wbindgen_export_2.get(state.dtor)(a, state.b);
+
+            } else {
+                state.a = a;
+            }
+        }
+    };
+    real.original = state;
+
+    return real;
+}
+function __wbg_adapter_29(arg0, arg1) {
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h19f8542174566be9(arg0, arg1);
 }
 
 function handleError(f, args) {
@@ -222,6 +250,8 @@ function handleError(f, args) {
 function getArrayU8FromWasm0(ptr, len) {
     return getUint8Memory0().subarray(ptr / 1, ptr / 1 + len);
 }
+
+function notDefined(what) { return () => { throw new Error(`${what} is not defined`); }; }
 
 let cachedUint32Memory0;
 function getUint32Memory0() {
@@ -356,6 +386,20 @@ function getImports() {
         const len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
         getInt32Memory0()[arg0 / 4 + 0] = ptr0;
+    };
+    imports.wbg.__wbg_setInterval_e8be0bc69235c174 = function() { return handleError(function (arg0, arg1) {
+        const ret = setInterval(getObject(arg0), arg1);
+        return ret;
+    }, arguments) };
+    imports.wbg.__wbg_clearInterval_fbf85692f84b269d = typeof clearInterval == 'function' ? clearInterval : notDefined('clearInterval');
+    imports.wbg.__wbindgen_cb_drop = function(arg0) {
+        const obj = takeObject(arg0).original;
+        if (obj.cnt-- == 1) {
+            obj.a = 0;
+            return true;
+        }
+        const ret = false;
+        return ret;
     };
     imports.wbg.__wbindgen_is_undefined = function(arg0) {
         const ret = getObject(arg0) === undefined;
@@ -560,8 +604,12 @@ function getImports() {
         const ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper2504 = function(arg0, arg1, arg2) {
-        const ret = makeClosure(arg0, arg1, 223, __wbg_adapter_24);
+    imports.wbg.__wbindgen_closure_wrapper2756 = function(arg0, arg1, arg2) {
+        const ret = makeClosure(arg0, arg1, 239, __wbg_adapter_26);
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbindgen_closure_wrapper5478 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 253, __wbg_adapter_29);
         return addHeapObject(ret);
     };
 
@@ -597,7 +645,7 @@ function initSync(bytes) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('tetris-884ed5ae4327be2a_bg.wasm', import.meta.url);
+        input = new URL('tetris-6b141715853a7e4_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 

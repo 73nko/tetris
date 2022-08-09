@@ -5,22 +5,60 @@
     <title>Tetris</title>
     <style>
       html {
-        font-size: 2em;
+        --start-color: #007cf0;
+        --end-color: #00dfd8;
+        font-size: 2.3em;
+        height: 100vh;
+        width: 100vw;
+        background: var(--start-color);
+        background: linear-gradient(
+          160deg,
+          var(--start-color) 0%,
+          var(--start-color) 35%,
+          var(--end-color) 100%
+        );
+      }
+      .container {
+        width: fit-content;
+        margin: 0 auto;
+        text-align: center;
+      }
+      h1 {
+        --start-color: #7928ca;
+        --end-color: #ff0080;
+        font-size: clamp(1rem, -0.875rem + 8.333vw, 3.5rem);
+        letter-spacing: -0.05em;
+        margin: 0;
+        font-weight: 700;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(
+          160deg,
+          var(--start-color),
+          var(--end-color)
+        );
       }
       .board {
-        border: 1px solid grey;
+        --start-color: #7928ca;
+        --end-color: #ff0080;
+        width: 100%;
+        border: 2px solid var(--start-color);
+        border-radius: 4px;
         display: inline-grid;
-        border: 1px solid #ccc;
+        outline: var(--start-color);
       }
       .field {
-        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     </style>
   
-<link rel="preload" href="/tetris-884ed5ae4327be2a_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/tetris-884ed5ae4327be2a.js"></head>
+<link rel="preload" href="/tetris-6b141715853a7e4_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/tetris-6b141715853a7e4.js"></head>
 <body>
-<script type="module">import init from '/tetris-884ed5ae4327be2a.js';init('/tetris-884ed5ae4327be2a_bg.wasm');</script><script>(function () {
+<script type="module">import init from '/tetris-6b141715853a7e4.js';init('/tetris-6b141715853a7e4_bg.wasm');</script><script>(function () {
     var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     var url = protocol + '//' + window.location.host + '/_trunk/ws';
     var poll_interval = 5000;

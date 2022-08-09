@@ -67,9 +67,9 @@ impl Tetris {
             == self.width
     }
 
-    pub fn tick(&mut self) {
+    pub fn tick(&mut self) -> Self {
         if self.lost {
-            return;
+            return self.to_owned();
         }
         let translated_current_shape = &self.current_shape + Pos(0, 1);
 
@@ -90,6 +90,8 @@ impl Tetris {
         } else {
             self.current_shape = translated_current_shape;
         }
+
+        self.to_owned()
     }
 
     pub fn shift(&mut self, direction: Direction) -> Self {
