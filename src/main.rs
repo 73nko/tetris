@@ -136,7 +136,7 @@ fn tetris_game() -> Html {
 
     html! {
         <div class="container">
-            <h1>{"Tetris"}</h1>
+            <h1>{"Tetris Game"}</h1>
             <Board
                 {positions}
                 {width}
